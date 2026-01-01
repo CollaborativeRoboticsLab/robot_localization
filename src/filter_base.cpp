@@ -61,7 +61,9 @@ FilterBase::FilterBase()
   identity_(STATE_SIZE, STATE_SIZE),
   process_noise_covariance_(STATE_SIZE, STATE_SIZE),
   transfer_function_(STATE_SIZE, STATE_SIZE),
-  transfer_function_jacobian_(STATE_SIZE, STATE_SIZE), debug_(false)
+  transfer_function_jacobian_(STATE_SIZE, STATE_SIZE), debug_(false),
+  innovation_(STATE_SIZE),
+  innovation_covariance_(STATE_SIZE, STATE_SIZE)
 {
   reset();
 }
@@ -76,6 +78,10 @@ void FilterBase::reset()
   state_.setZero();
   predicted_state_.setZero();
   control_acceleration_.setZero();
+
+  // Clear innovation-related data
+  innovation_.setZero();
+  innovation_covariance_.setZero();
 
   // Prepare the invariant parts of the transfer
   // function
@@ -190,6 +196,16 @@ const rclcpp::Duration & FilterBase::getSensorTimeout()
 }
 
 const Eigen::VectorXd & FilterBase::getState() {return state_;}
+
+const Eigen::VectorXd & FilterBase::getInnovation()
+{
+  return innovation_;
+}
+
+const Eigen::MatrixXd & FilterBase::getInnovationCovariance()
+{
+  return innovation_covariance_;
+}
 
 void FilterBase::processMeasurement(const Measurement & measurement)
 {

@@ -61,6 +61,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/imu.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <std_msgs/msg/float64_multi_array.hpp>
 #include <std_srvs/srv/empty.hpp>
 #include <diagnostic_msgs/msg/diagnostic_status.hpp>
 #include <diagnostic_updater/diagnostic_updater.hpp>
@@ -778,6 +779,16 @@ protected:
   //!
   rclcpp::Publisher<geometry_msgs::msg::AccelWithCovarianceStamped>::SharedPtr
     accel_pub_;
+
+  //! @brief Innovation (residual) publisher
+  //!
+  rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr
+    innovation_pub_;
+
+  //! @brief Innovation covariance (S) publisher
+  //!
+  rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr
+    innovation_covar_pub_;
 
   //! @brief Our filter (EKF, UKF, etc.)
   //!
