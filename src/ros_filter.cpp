@@ -41,11 +41,16 @@
 #include <memory>
 #include <vector>
 
-#include <robot_localization/ekf.hpp>
 #include <robot_localization/filter_utilities.hpp>
 #include <robot_localization/ros_filter.hpp>
 #include <robot_localization/ros_filter_utilities.hpp>
+
+#include <robot_localization/ekf.hpp>
 #include <robot_localization/ukf.hpp>
+
+// Fault-tolerant filter variants
+#include <robot_localization/fault/ekf_ft.hpp>
+#include <robot_localization/fault/ukf_ft.hpp>
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
 #include <rclcpp/qos.hpp>
@@ -3630,3 +3635,5 @@ namespace robot_localization
 
 template class robot_localization::RosFilter<robot_localization::Ekf>;
 template class robot_localization::RosFilter<robot_localization::Ukf>;
+template class robot_localization::RosFilter<robot_localization::EkfFT>;
+template class robot_localization::RosFilter<robot_localization::UkfFT>;

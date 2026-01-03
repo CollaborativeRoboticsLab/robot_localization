@@ -47,11 +47,13 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SetPose.srv"
   "srv/ToggleFilterProcessing.srv"
   "srv/ToLL.srv"
+  "msg/InternalState.msg"
   DEPENDENCIES
     builtin_interfaces
     geometry_msgs
     geographic_msgs
     diagnostic_msgs
+    std_msgs
   ADD_LINTER_TESTS
 )
 
@@ -95,6 +97,16 @@ add_executable(
 add_executable(
   robot_localization_listener_node
   src/robot_localization_listener_node.cpp
+)
+
+add_executable(
+  ekf_ft_node
+  src/fault/ekf_ft_node.cpp
+)
+
+add_executable(
+  ukf_ft_node
+  src/fault/ukf_ft_node.cpp
 )
 
 target_link_libraries(
@@ -160,6 +172,26 @@ target_link_libraries(
 
 ament_target_dependencies(
   robot_localization_listener_node
+  rclcpp
+)
+
+target_link_libraries(
+  ekf_ft_node
+  ${library_name}
+)
+
+ament_target_dependencies(
+  ekf_ft_node
+  rclcpp
+)
+
+target_link_libraries(
+  ukf_ft_node
+  ${library_name}
+)
+
+ament_target_dependencies(
+  ukf_ft_node
   rclcpp
 )
 
@@ -328,6 +360,8 @@ install(
   ekf_node
   ukf_node
   robot_localization_listener_node
+  ekf_ft_node
+  ukf_ft_node
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
