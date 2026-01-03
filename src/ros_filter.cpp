@@ -3635,5 +3635,7 @@ namespace robot_localization
 
 template class robot_localization::RosFilter<robot_localization::Ekf>;
 template class robot_localization::RosFilter<robot_localization::Ukf>;
+
+// Explicitly instantiate the fault tolerant versions as well.
 template class robot_localization::RosFilter<robot_localization::EkfFT>;
 template class robot_localization::RosFilter<robot_localization::UkfFT>;

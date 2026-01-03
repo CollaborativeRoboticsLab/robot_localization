@@ -11,8 +11,8 @@ internal filter state for supervision and fault detection.
 
 Currently it provides two ROS 2 packages:
 
-- [robot_localization_msg](./docs/robot_localization_msg.md)
-- [robot_localization_ft](./docs/robot_localization_ft.md)
+- [robot_localization_msg](./doc/robot_localization_msg.md)
+- [robot_localization_ft](./doc/robot_localization_ft.md)
 
 ## robot_localization_msg
 
